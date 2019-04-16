@@ -32,6 +32,27 @@ public class Solution_1_1
   return true;
   
   }
-
-
+  
+  
+  // We can reduce the space size by 8 , by using bits
+  
+  public boolean isTheStringUnique2(String str)
+  {
+      // Assumption is that all the characters are lower case and they are between a to z
+      
+      int verifier = 0;
+      
+      for(int i=0; i<str.length();i++){
+         
+         int value = str.charAt(i) - 'a';
+         // if the character at i already exists , then the logical and with verifier bit would give a value greater than 0.
+         if((verifier & (1 << value))> 0)
+             return false;
+         // If the character at i is unique, or the first appearance, then verifier is updated with the character at i. So next time when the same character appears, the logical and would result in a zero.
+         verifier |= (1 << str.charAt(i));    
+      
+      }
+      
+      return true;
+  }
 }
